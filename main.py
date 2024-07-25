@@ -19,20 +19,20 @@ async def read_root(request: Request):
 
 # Add new TODO item route
 @app.post("/add")
-async def add_todo(request: Request, newtodo: str = Form(...)):
-    try:
-        with open('sample.json', 'r') as f:
-            data = json.load(f)
-    except FileNotFoundError:
-        data = {}
-    
-    new_id = str(len(data) + 1)  # Generate new ID (simple increment)
-    data[new_id] = newtodo  # Add new TODO item to dictionary
-
-    with open('sample.json', 'w') as f:
-        json.dump(data, f)
-
-    return RedirectResponse("/", status_code=303)
+async def add_todo(request:Request):
+    with open('sample.json') as f:
+        data=json.load(f)
+    formdata=await request.form()
+    newdata={}
+    i=1
+    for id in data:
+        newdata[str(i)]=data[id]
+        i+=1
+    newdata[str(i)]=formdata["newtodo"]
+    print(newdata)
+    with open('sample.json','w') as f:
+        json.dump(newdata,f)
+    return RedirectResponse("/",303)
 
 # Delete TODO item route
 @app.get("/delete/{id}")
