@@ -5,7 +5,6 @@ import json
 
 app = FastAPI()
 templates = Jinja2Templates(directory="template")  # Assumes templates are stored in a directory named "templates"
-test
 # Home page route
 @app.get("/")
 async def read_root(request: Request):
