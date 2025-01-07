@@ -5,7 +5,7 @@ import json
 
 app = FastAPI()
 templates = Jinja2Templates(directory="template")  # Assumes templates are stored in a directory named "templates"
-
+test
 # Home page route
 @app.get("/")
 async def read_root(request: Request):
@@ -25,7 +25,6 @@ async def add_todo(request:Request):
     formdata=await request.form()
     newdata={}
     i=1
-    test
     for id in data:
         newdata[str(i)]=data[id]
         i+=1
